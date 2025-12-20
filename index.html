@@ -5,19 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Study 2 Survey Router</title>
 </head>
-<body>
+<body style="font-family: Arial; padding: 24px;">
+  <h2>Study 2 問卷分配</h2>
+  <p>3 秒內為你隨機分配問卷，請稍候…</p>
+  <p id="debug" style="margin-top: 12px;"></p>
+
   <script>
+    // 1) 把四份問卷網址放進陣列（請換成你的 SurveyCake 連結）
     const surveys = [
       "https://www.surveycake.com/s/8k7WQ",
       "https://www.surveycake.com/s/blMMw",
       "https://www.surveycake.com/s/4oKKy",
       "https://www.surveycake.com/s/4oKKy"
+
     ];
 
+    // 2) 隨機挑一份（0~3）
     const index = Math.floor(Math.random() * surveys.length);
+
+    // 3) 組別顯示用（1~4，比較符合人類直覺）
+    const group = index + 1;
+
+    // 4) 選出目標網址
     const target = surveys[index];
 
-    location.replace(target);
+    // 5) 顯示目前分配結果（讓你/受試者知道不是卡住）
+    document.getElementById("debug").textContent =
+      `本次分配：第 ${group} 份問卷`;
+
+    // 6) 3 秒後跳轉
+    setTimeout(() => {
+      location.href = target;
+    }, 3000);
   </script>
 </body>
 </html>
